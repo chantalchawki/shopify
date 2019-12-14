@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Shopify.Services.ItemsService" CodeBehind="ItemsService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Shopify.Api.ItemsService" CodeBehind="ItemsService.svc.cs" %>
