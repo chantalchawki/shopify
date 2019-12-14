@@ -8,7 +8,7 @@ namespace Shopify.Api
     public class ItemsService : IItemsService
     {
         private ShopifyContext _dbContext = new ShopifyContext();
-
+        
         public Item CreateItem(Item item)
         {
             var created = this._dbContext.Items.Add(item);
@@ -25,8 +25,8 @@ namespace Shopify.Api
 
         public List<Item> GetAll()
         {
-            var items = from item in this._dbContext.Items select item;
-            return items.ToList();
+            var items = this._dbContext.Items.Include("Category");
+            return items.ToList<Item>();
         }
 
         public Item GetItem(string id)

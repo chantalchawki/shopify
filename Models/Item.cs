@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace Shopify.Models
 {
-    [DataContract(Namespace = "")]
+    [DataContract(Namespace = "Shopify.Models")]
     public class Item
     {
         [DataMember]
@@ -17,5 +18,12 @@ namespace Shopify.Models
 
         [DataMember]
         public string Description { get; set; }
+
+        [DataMember]
+        public int CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        [DataMember]
+        public virtual Category Category { get; set; }
     }
 }
