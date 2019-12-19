@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PropTypes from "prop-types";
-
 import {
   Button,
   Typography,
@@ -16,7 +16,7 @@ import styles from "./styles";
 function Header({ classes }) {
   const [user, setUser] = useState();
   useEffect(() => {
-    setUser();
+    setUser({});
   }, []);
   return (
     <div container className={classes.root}>
@@ -38,9 +38,15 @@ function Header({ classes }) {
               </Button>
             </React.Fragment>
           ) : (
-            <Typography variant="h6" color="inherit">
-              user
-            </Typography>
+            <React.Fragment>
+              <Typography variant="h6" color="inherit">
+                user
+              </Typography>
+              <ShoppingCartIcon
+                className={classes.icon}
+                onClick={() => console.log("pressed")}
+              />
+            </React.Fragment>
           )}
         </Toolbar>
       </AppBar>

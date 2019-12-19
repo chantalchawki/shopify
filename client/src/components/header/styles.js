@@ -15,5 +15,8 @@ export default theme => ({
   btn: {
     background: "darkorange",
     marginLeft: 5
+  },
+  icon: {
+    marginLeft: 10
   }
 });

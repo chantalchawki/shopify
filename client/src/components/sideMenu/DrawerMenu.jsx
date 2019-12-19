@@ -1,7 +1,5 @@
 import React from "react";
 
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import {
   Drawer,
   List,
@@ -20,9 +18,7 @@ function DrawerMenu({ classes }) {
         <List>
           {["Categories"].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
+              <ListItemIcon></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
