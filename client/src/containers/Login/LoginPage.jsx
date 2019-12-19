@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Grid,
-  Link,
   Button,
   TextField,
   Typography,
@@ -17,6 +17,12 @@ import PropTypes from "prop-types";
 import styles from "./styles";
 
 function LoginPage({ classes }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState("");
+  const handleSubmit = (event, props) => {
+    event.preventDefault();
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -27,7 +33,7 @@ function LoginPage({ classes }) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -38,6 +44,7 @@ function LoginPage({ classes }) {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -49,10 +56,12 @@ function LoginPage({ classes }) {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={e => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
+            onChange={e => setRemember(e.target.value)}
           />
           <Button
             type="submit"
@@ -65,7 +74,7 @@ function LoginPage({ classes }) {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/register" variant="body2">
+              <Link to="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
