@@ -3,7 +3,9 @@ export default theme => ({
     display: "flex"
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1
+    zIndex: theme.zIndex.drawer + 1,
+    position: "relative",
+    width: "100vw"
   },
   title: {
     flexGrow: 1
