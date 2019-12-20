@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import PropTypes from "prop-types";
 import {
   Button,
   Typography,
@@ -53,7 +52,4 @@ function Header({ classes }) {
     </div>
   );
 }
-Header.propTypes = {
-  classes: PropTypes.shape().isRequired
-};
 export default withStyles(styles)(Header);

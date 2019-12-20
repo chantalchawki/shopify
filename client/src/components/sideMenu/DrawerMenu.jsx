@@ -12,21 +12,15 @@ import styles from "./styles";
 
 function DrawerMenu({ classes }) {
   return (
-    <React.Fragment>
-      <Drawer variant="permanent" open={true} className={classes.drawer}>
-        <div className={classes.toolbar} />
-        <List>
-          {["Categories"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </React.Fragment>
+    <div className={classes.drawer}>
+      <List className={classes.list}>
+        {["Categories"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
   );
 }
-DrawerMenu.propTypes = {};
-
 export default withStyles(styles)(DrawerMenu);
