@@ -10,7 +10,9 @@ namespace Shopify.Db
         public DbSet<User> Users { get; set; }
         
         public DbSet<Order> Orders { get; set; }
-        
+
+        public DbSet<Category> Categories { get; set; }
+
         public ShopifyContext()
         {
             this.Configuration.ProxyCreationEnabled = false;

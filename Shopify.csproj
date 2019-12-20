@@ -71,12 +71,17 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="api\CategoriesService.svc" />
     <Content Include="api\ItemsService.svc" />
     <Content Include="api\OrdersService.svc" />
     <Content Include="api\UsersService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\CategoriesService.svc.cs">
+      <DependentUpon>CategoriesService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="api\ICategoriesService.cs" />
     <Compile Include="api\IOrdersService.cs" />
     <Compile Include="api\IUsersService.cs" />
     <Compile Include="api\OrdersService.svc.cs">
