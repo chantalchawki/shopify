@@ -13,7 +13,6 @@ import {
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import PropTypes from "prop-types";
 import styles from "./styles";
 
 function LoginPage({ classes }) {
@@ -85,7 +84,4 @@ function LoginPage({ classes }) {
   );
 }
 
-LoginPage.propTypes = {
-  classes: PropTypes.shape().isRequired
-};
 export default withStyles(styles)(LoginPage);

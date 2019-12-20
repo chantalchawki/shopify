@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import PropTypes from "prop-types";
 import styles from "./styles";
 
 function RegistrationPage({ classes }) {
@@ -135,7 +134,4 @@ function RegistrationPage({ classes }) {
   );
 }
 
-RegistrationPage.propTypes = {
-  classes: PropTypes.shape().isRequired
-};
 export default withStyles(styles)(RegistrationPage);
