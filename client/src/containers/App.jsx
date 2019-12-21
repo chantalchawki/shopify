@@ -8,6 +8,7 @@ import page404 from "./page404/page404";
 import EditItem from "./EditItem/EditItem";
 import ProfilePage from "./Profile/ProfilePage";
 import CheckOutPage from "./CheckOut/CheckOutPage";
+import CartPage from "./Cart/CartPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" exact component={LoginPage} />
           <Route path="/" exact component={LandingPage} />
           <Route path="/addItem" exact component={AddItem} />
+          <Route path="/cart" exact component={CartPage} />
           <Route path="/page404" exact component={page404} />
           <Route path="/EditItem" exact component={EditItem} />
           <Route path="/ProfilePage" exact component={ProfilePage} />

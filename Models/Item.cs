@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -22,8 +23,10 @@ namespace Shopify.Models
         [DataMember]
         public int CategoryId { get; set; }
 
-        [ForeignKey("CategoryId")]
         [DataMember]
+        [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+
+        public virtual List<Order> Orders { get; set; }
     }
 }

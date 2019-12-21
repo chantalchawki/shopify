@@ -1,6 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Shopify.Http;
 using Shopify.Models;
-using System;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
@@ -17,6 +16,6 @@ namespace Shopify.api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/login"
         )]
-        String Login(LoginPayload payload);
+        HttpResponse<string> Login(LoginPayload payload);
     }
 }

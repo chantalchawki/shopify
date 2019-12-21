@@ -1,4 +1,5 @@
-﻿using Shopify.Models;
+﻿using Shopify.Http;
+using Shopify.Models;
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -6,7 +7,6 @@ using System.ServiceModel.Web;
 
 namespace Shopify.api
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IUsersService" in both code and config file together.
     [ServiceContract]
     public interface IUsersService
     {
@@ -17,7 +17,7 @@ namespace Shopify.api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/"
         )]
-        List<User> GetAll();
+        HttpResponse<List<User>> GetAll();
 
         [OperationContract]
         [WebInvoke(
@@ -25,8 +25,8 @@ namespace Shopify.api
           ResponseFormat = WebMessageFormat.Json,
           BodyStyle = WebMessageBodyStyle.Bare,
           UriTemplate = "/{id}"
-      )]
-        User GetOne(string Id);
+        )]
+        HttpResponse<User> GetOne(string Id);
 
         [OperationContract]
         [WebInvoke(
@@ -34,7 +34,7 @@ namespace Shopify.api
            ResponseFormat = WebMessageFormat.Json,
            BodyStyle = WebMessageBodyStyle.Bare,
            UriTemplate = "/"
-       )]
-        User Create(User user);
+        )]
+        HttpResponse<User> Create(User user);
     }
 }

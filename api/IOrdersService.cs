@@ -1,4 +1,5 @@
-﻿using Shopify.Models;
+﻿using Shopify.Http;
+using Shopify.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Shopify.api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/"
         )]
-        List<Order> GetAll();
+        HttpResponse<List<Order>> GetAll();
 
         [OperationContract]
         [WebInvoke(
@@ -28,7 +29,7 @@ namespace Shopify.api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/{id}"
         )]
-        Order GetOne(string id);
+        HttpResponse<Order> GetOne(string id);
 
         [OperationContract]
         [WebInvoke(
@@ -37,7 +38,6 @@ namespace Shopify.api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/"
         )]
-        Order Create(Order order);
-
+        HttpResponse<Order> Create(Order order);
     }
 }

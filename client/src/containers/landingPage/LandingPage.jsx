@@ -12,28 +12,27 @@ function LandingPage({ classes }) {
   useEffect(() => {
     setItems([
       {
+        id: 1,
         name: "itemName",
-        price: "1.0 L.E",
+        price: "1.0",
         description: "Khaled Khaled Ana 3ayz Pepsiii"
       },
       {
+        id: 2,
         name: "itemName",
-        price: "1.0 L.E",
+        price: "1.0",
         description: "Khaled Khaled Ana 3ayz Pepsiii"
       },
       {
+        id: 3,
         name: "itemName",
-        price: "1.0 L.E",
+        price: "1.0",
         description: "Khaled Khaled Ana 3ayz Pepsiii"
       },
       {
+        id: 4,
         name: "itemName",
-        price: "1.0 L.E",
-        description: "Khaled Khaled Ana 3ayz Pepsiii"
-      },
-      {
-        name: "itemName",
-        price: "1.0 L.E",
+        price: "1.0",
         description: "Khaled Khaled Ana 3ayz Pepsiii"
       }
     ]);
