@@ -12,6 +12,7 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import styles from "./styles";
+import UsersService from "../../Services/UsersService";
 
 function RegistrationPage({ classes }) {
   const [name, setName] = useState("");
@@ -23,6 +24,15 @@ function RegistrationPage({ classes }) {
 
   const handleSubmit = (event, props) => {
     event.preventDefault();
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+      area: area,
+      address: address,
+      mobile: mobile
+    };
+    UsersService.register(user);
   };
 
   return (

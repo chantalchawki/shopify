@@ -14,6 +14,7 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import styles from "./styles";
+import UsersService from "../../Services/UsersService";
 
 function LoginPage({ classes }) {
   const [email, setEmail] = useState("");
@@ -21,6 +22,12 @@ function LoginPage({ classes }) {
   const [remember, setRemember] = useState("");
   const handleSubmit = (event, props) => {
     event.preventDefault();
+    const user = {
+      email: email,
+      password: password
+    };
+    let res = UsersService.login(user);
+    localStorage.setItem("token", res.data.token);
   };
   return (
     <Container component="main" maxWidth="xs">

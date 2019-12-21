@@ -14,32 +14,37 @@ import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "./styles";
 import Header from "../../components/header/Header";
+import axios from "axios";
 
 function AddItem({ classes }) {
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [categoryId, setCategoryId] = useState("");
   const [categories, setCategories] = useState("");
 
   useEffect(() => {
-    setCategories([
-      {
-        title: "khaled"
-      },
-      {
-        title: "ana"
-      },
-      {
-        title: "3ayez"
-      },
-      {
-        title: "pepsi"
-      }
-    ]);
+    axios
+      .get(`http://localhost:62248/api/CategoriesService.svc/1`)
+      .then(res => {
+        setCategories(res.data);
+      });
   }, []);
 
   const handleSubmit = (event, props) => {
     event.preventDefault();
+    const item = {
+      Name: itemName,
+      Price: price,
+      Description: description,
+      CategoryId: categoryId
+    };
+    axios
+      .post("http://localhost:62248/api/ItemsService.svc/", { item })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
   };
   return (
     <React.Fragment>
@@ -90,10 +95,11 @@ function AddItem({ classes }) {
               onChange={e => setPrice(e.target.value)}
             />
             <Autocomplete
-              id="combo-box-demo"
+              id="categoriesComboBox"
               options={categories}
               getOptionLabel={option => option.title}
               style={{ width: 300 }}
+              onChange={e => setCategoryId(e.target.value.id)}
               renderInput={params => (
                 <TextField
                   {...params}
