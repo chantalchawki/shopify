@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
-  Grid,
   Button,
   TextField,
   Typography,
@@ -12,41 +10,46 @@ import {
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import withStyles from "@material-ui/core/styles/withStyles";
-import styles from "./styles";
 
-function EditItem({ classes }) {
-  const [itemName, setItemName] = useState("");
+import styles from "./styles";
+import CategoriesService from "../../Services/CategoriesService";
+import ItemsService from "../../Services/ItemsService";
+
+function EditItem({ classes, history, match }) {
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [category, setCategory] = useState(0);
   const [categories, setCategories] = useState("");
-  const [item, setItem] = useState("");
+
   useEffect(() => {
-    setCategories([
-      {
-        title: "khaled"
-      },
-      {
-        title: "ana"
-      },
-      {
-        title: "3ayez"
-      },
-      {
-        title: "pepsi"
-      }
-    ]);
-    setItem({
-      name: itemName,
-      description: description,
-      price: price
-    });
+    loadData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const x = {
-    n: "kariimm",
-    desc: "heeeleloooo",
-    pr: "1,0"
-  };
+  const loadData = async () => {
+    setCategories((await CategoriesService.getAllCategories()).data.Result);
+    const item = (await ItemsService.getItem(match.params.id)).data.Result;
+    setName(item.Name);
+    setDescription(item.Description);
+    setCategory(item.Category);
+    setPrice(item.Price);
+  }
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const res = await ItemsService.UpdateItem({
+      Id: match.params.id,
+      Name: name,
+      Description: description,
+      CategoryId: category.Id,
+      Price: price,
+    });
+
+    if (res.status === 200) {
+      history.push('/');
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -63,20 +66,20 @@ function EditItem({ classes }) {
             variant="outlined"
             margin="normal"
             required
-            value={x.n}
+            value={name}
             fullWidth
             id="name"
             label="name"
             name="name"
             autoFocus
-            onChange={e => setItemName(e.target.value)}
+            onChange={e => setName(e.target.value)}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            value={x.desc}
+            value={description}
             name="description"
             label="Description"
             type="description"
@@ -91,15 +94,17 @@ function EditItem({ classes }) {
             name="price"
             label="Price"
             type="price"
-            value={x.pr}
+            value={price}
             id="price"
             onChange={e => setPrice(e.target.value)}
           />
           <Autocomplete
             id="combo-box-demo"
             options={categories}
-            getOptionLabel={option => option.title}
+            getOptionLabel={option => option.Name}
             style={{ width: 300 }}
+            value={category}
+            onChange={(event, value) => setCategory(value)}
             renderInput={params => (
               <TextField
                 {...params}
@@ -115,6 +120,7 @@ function EditItem({ classes }) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={onSubmit}
           >
             Edit
           </Button>

@@ -8,13 +8,19 @@ import ItemCard from "../../components/ItemCard/ItemCard";
 
 import styles from "./styles";
 import ItemsService from "../../Services/ItemsService";
+import AuthService from "../../Services/AuthService";
 
 function LandingPage({ classes }) {
   const [items, setItems] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     loadItems();
+    const user = AuthService.user;
+    if(user){
+      setIsAdmin(user.isAdmin)
+    }
   }, []);
-
+  console.log(isAdmin);
   const loadItems = async () => {
     const items = (await ItemsService.getAllItems()).data.Result;
     setItems(items);
@@ -36,16 +42,16 @@ function LandingPage({ classes }) {
           alignContent="space-between"
         >
           {items.map(item => {
-            return <ItemCard item={item} />;
+            return <ItemCard item={item} onDelete={loadItems} isAdmin={isAdmin} />;
           })}
         </Grid>
-        <Grid item className={classes.addIcon}>
+        {isAdmin === "True" && <Grid item className={classes.addIcon}>
           <Link to="/addItem">
             <Fab color="primary" aria-label="add">
               <AddIcon />
             </Fab>
           </Link>
-        </Grid>
+        </Grid>}
       </Grid>
     </Grid>
   );

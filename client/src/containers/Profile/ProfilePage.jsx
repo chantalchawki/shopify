@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import {
   Grid,
@@ -11,26 +11,36 @@ import {
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PersonIcon from "@material-ui/icons/Person";
+import AuthService from "../../Services/AuthService";
+import UsersService from "../../Services/UsersService";
+
 import styles from "./styles";
 
-function ProfilePage({ classes }) {
-  const [fName, setFName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [area, setArea] = useState("");
+function ProfilePage({ classes, history }) {
+  const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [mobile, setMobile] = useState("");
-  const handleSubmit = (event, props) => {
-    event.preventDefault();
-  };
+  
+  useEffect(() => {
+    const user = AuthService.user;
+    setName(user.name);
+    setAddress(user.address);
+    setMobile(user.mobile);
+  }, []);
 
-  const profile = {
-    name: "mariam",
-    mail: "gmail",
-    mobile: "01294727",
-    password: "SDf",
-    address: "Aef",
-    area: "dfdssf"
+  const handleSubmit = async (event, props) => {
+    event.preventDefault();
+    const u = AuthService.user;
+    const user = {
+      Id: u.id,
+      Area: u.area,
+      Name: name,
+      Address: address,
+      Mobile: mobile
+    }
+    await UsersService.UpdateUser(user);
+    await AuthService.logout();
+    history.push('/');
   };
 
   return (
@@ -45,51 +55,24 @@ function ProfilePage({ classes }) {
             <PersonIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Profile
+            Edit Profile
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="fname"
-                  name="firstName"
+                  autoComplete="name"
+                  name="name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="name"
+                  label="Name"
                   autoFocus
-                  value={profile.name}
-                  onChange={e => setFName(e.target.value)}
+                  value={name}
+                  onChange={e => setName(e.target.value)}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  value={profile.mail}
-                  onChange={e => setEmail(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  value={profile.password}
-                  autoComplete="current-password"
-                  onChange={e => setPassword(e.target.value)}
-                />
-              </Grid>
+              </Grid> 
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -99,7 +82,7 @@ function ProfilePage({ classes }) {
                   label="Address"
                   id="address"
                   autoComplete="address"
-                  value={profile.address}
+                  value={address}
                   onChange={e => setAddress(e.target.value)}
                 />
               </Grid>
@@ -112,21 +95,8 @@ function ProfilePage({ classes }) {
                   label="Mobile"
                   id="mobile"
                   autoComplete="mobile"
-                  value={profile.mobile}
+                  value={mobile}
                   onChange={e => setMobile(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="area"
-                  label="Area"
-                  id="area"
-                  autoComplete="area"
-                  value={profile.area}
-                  onChange={e => setArea(e.target.value)}
                 />
               </Grid>
             </Grid>

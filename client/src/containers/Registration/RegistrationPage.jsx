@@ -41,6 +41,7 @@ function RegistrationPage({ classes, history }) {
       Mobile: mobile
     };
     UsersService.register(user);
+    history.push("/login");
   };
 
   return (

@@ -22,12 +22,12 @@ function App() {
         <Switch>
           <Route path="/register" exact component={RegistrationPage} />
           <Route path="/login" exact component={LoginPage} />
-          <PrivateRoute path="/" exact component={LandingPage} />
+          <Route path="/" exact component={LandingPage} />
           <PrivateRoute path="/addItem" exact component={AddItem} />
           <PrivateRoute path="/cart" exact component={CartPage} />
           <Route path="/page404" exact component={page404} />
-          <Route path="/EditItem" exact component={EditItem} />
-          <Route path="/ProfilePage" exact component={ProfilePage} />
+          <Route path="/EditItem/:id" exact component={EditItem} />
+          <Route path="/Profile" exact component={ProfilePage} />
           <Route path="/checkOut" exact component={CheckOutPage} />
         </Switch>
       </Router>

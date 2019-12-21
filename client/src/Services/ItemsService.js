@@ -17,9 +17,7 @@ function deleteItem(itemId) {
 }
 
 function UpdateItem(item) {
-  return axios.patch(`http://localhost:62248/api/ItemsService.svc/${item.id}`, {
-    item
-  });
+  return axios.patch(`http://localhost:62248/api/ItemsService.svc/${item.Id}`, item);
 }
 
 export default {
