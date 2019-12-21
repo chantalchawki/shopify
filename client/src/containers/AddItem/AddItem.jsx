@@ -14,7 +14,8 @@ import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "./styles";
 import Header from "../../components/header/Header";
-import axios from "axios";
+import ItemsService from "../../Services/ItemsService";
+import CategoriesService from "../../Services/CategoriesService";
 
 function AddItem({ classes }) {
   const [itemName, setItemName] = useState("");
@@ -24,11 +25,8 @@ function AddItem({ classes }) {
   const [categories, setCategories] = useState("");
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:62248/api/CategoriesService.svc/1`)
-      .then(res => {
-        setCategories(res.data);
-      });
+    let res = CategoriesService.getAllCategories();
+    setCategories(res.data);
   }, []);
 
   const handleSubmit = (event, props) => {
@@ -39,12 +37,7 @@ function AddItem({ classes }) {
       Description: description,
       CategoryId: categoryId
     };
-    axios
-      .post("http://localhost:62248/api/ItemsService.svc/", { item })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
+    ItemsService.createItem(item);
   };
   return (
     <React.Fragment>
