@@ -5,6 +5,10 @@ export default theme => ({
     flexDirection: "column",
     alignItems: "center"
   },
+
+  header: {
+    flexDirection: "row"
+  },
   VisaForm: {
     padding: "2%"
   },
