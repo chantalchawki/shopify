@@ -1,31 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Security.Claims;
-using System.ServiceModel;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Shopify.Db;
+using Shopify.Http;
 using Shopify.Models;
 
 namespace Shopify.api
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "AuthenticationService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select AuthenticationService.svc or AuthenticationService.svc.cs at the Solution Explorer and start debugging.
     public class AuthenticationService : IAuthenticationService
     {
         private ShopifyContext _dbContext = new ShopifyContext();
 
-        public String Login(LoginPayload payload)
+        public HttpResponse<string> Login(LoginPayload payload)
         {
             var results = from u in this._dbContext.Users where u.Email == payload.Email && u.Password == payload.Password select u;
             var result = results.ToList();
 
             if(result.Count() == 0)
             {
-                throw new Exception();
+                return new BadRequest<string>("Invalid email or password.");
             }
 
             var user = result[0];
@@ -46,7 +42,7 @@ namespace Shopify.api
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateEncodedJwt(tokenDescriptor);
-            return token.ToString();
+            return new Ok<string>(token.ToString());
         }
     }
 }

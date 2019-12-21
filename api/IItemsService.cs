@@ -16,7 +16,7 @@ namespace Shopify.Api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/"
         )]
-        List<Item> GetAll();
+        HttpResponse<List<Item>> GetAll();
 
         [OperationContract]
         [WebInvoke(
@@ -25,7 +25,7 @@ namespace Shopify.Api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/{id}"
         )]
-        Item GetItem(string id);
+        HttpResponse<Item> GetItem(string id);
 
         [OperationContract]
         [WebInvoke(
@@ -34,7 +34,7 @@ namespace Shopify.Api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/"
         )]
-        HttpResponse CreateItem(Item item);
+        HttpResponse<Item> CreateItem(Item item);
 
         [OperationContract]
         [WebInvoke(
@@ -43,7 +43,7 @@ namespace Shopify.Api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/{id}"
         )]
-        Item UpdateItem(string id, Item item);
+        HttpResponse<Item> UpdateItem(string id, Item item);
 
         [OperationContract]
         [WebInvoke(
@@ -52,6 +52,6 @@ namespace Shopify.Api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/{id}"
         )]
-        void DeleteItem(string id);
+        HttpResponse<object> DeleteItem(string id);
     }
 }

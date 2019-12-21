@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 namespace Shopify.Models
 {
     [DataContract(Namespace = "")]
-
     public class Order
     {
         [DataMember]
@@ -15,9 +14,12 @@ namespace Shopify.Models
         
         [DataMember]
         public int Price { set; get; }
+
+        [DataMember]
+        public List<int> ItemIds { set; get; }
         
         [DataMember]
-        public List<Item> Items { set; get; }
+        public virtual List<Item> Items { set; get; }
 
         [DataMember]
         public int UserId { set; get; }

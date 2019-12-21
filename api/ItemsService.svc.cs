@@ -11,40 +11,47 @@ namespace Shopify.Api
     {
         private ShopifyContext _dbContext = new ShopifyContext();
         
-        public HttpResponse CreateItem(Item item)
+        public HttpResponse<Item> CreateItem(Item item)
         {
             var created = this._dbContext.Items.Add(item);
             this._dbContext.SaveChanges();
-            var res = new Created(created);
-            return res;
+            return new Created<Item>(created);
         }
 
-        public void DeleteItem(string id)
+        public HttpResponse<object> DeleteItem(string id)
         {
             var item = this._dbContext.Items.Find(new object[] { int.Parse(id) });
             this._dbContext.Items.Remove(item);
             this._dbContext.SaveChanges();
+            return new Ok<object>(null);
         }
 
-        public List<Item> GetAll()
+        public HttpResponse<List<Item>> GetAll()
         {
             var items = this._dbContext.Items.Include("Category");
-            return items.ToList<Item>();
+            return new Ok<List<Item>>(items.ToList<Item>());
         }
 
-        public Item GetItem(string id)
+        public HttpResponse<Item> GetItem(string id)
         {
-            return this._dbContext.Items.Find(new object[] { int.Parse(id) });
+            int integerId = int.Parse(id);
+            var item = this._dbContext.Items.Include("Category").FirstOrDefault(i => i.Id == integerId);
+            if (item == null)
+            {
+                return new NotFound<Item>("Item not found.");
+            }
+
+            return new Ok<Item>(item);
         }
 
-        public Item UpdateItem(string id, Item item)
+        public HttpResponse<Item> UpdateItem(string id, Item item)
         {
             var oldItem = this._dbContext.Items.Find(new object[] { int.Parse(id) });
             oldItem.Name = item.Name;
             oldItem.Price = item.Price;
             oldItem.Description = item.Description;
             this._dbContext.SaveChanges();
-            return oldItem;
+            return new Ok<Item>(oldItem);
         }
     }
 }

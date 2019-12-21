@@ -126,8 +126,12 @@
       <DependentUpon>UsersService.svc</DependentUpon>
     </Compile>
     <Compile Include="Db\ShopifyContext.cs" />
+    <Compile Include="Http\BadRequest.cs" />
     <Compile Include="Http\Created.cs" />
     <Compile Include="Http\HttpResponse.cs" />
+    <Compile Include="Http\InternalServerError.cs" />
+    <Compile Include="Http\NotFound.cs" />
+    <Compile Include="Http\Ok.cs" />
     <Compile Include="Models\LoginPayload.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Item.cs" />
