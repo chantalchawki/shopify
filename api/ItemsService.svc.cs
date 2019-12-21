@@ -2,6 +2,8 @@
 using System.Linq;
 using Shopify.Models;
 using Shopify.Db;
+using Shopify.Http;
+using System.Net;
 
 namespace Shopify.Api
 {
@@ -9,11 +11,12 @@ namespace Shopify.Api
     {
         private ShopifyContext _dbContext = new ShopifyContext();
         
-        public Item CreateItem(Item item)
+        public HttpResponse CreateItem(Item item)
         {
             var created = this._dbContext.Items.Add(item);
             this._dbContext.SaveChanges();
-            return created;
+            var res = new Created(created);
+            return res;
         }
 
         public void DeleteItem(string id)

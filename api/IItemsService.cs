@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using Shopify.Models;
+using Shopify.Http;
 
 namespace Shopify.Api
 {
@@ -33,7 +34,7 @@ namespace Shopify.Api
             BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "/"
         )]
-        Item CreateItem(Item item);
+        HttpResponse CreateItem(Item item);
 
         [OperationContract]
         [WebInvoke(
