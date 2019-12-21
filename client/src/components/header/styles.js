@@ -10,6 +10,9 @@ export default theme => ({
   title: {
     flexGrow: 1
   },
+  rightGrid: {
+    placeContent: "flex-end"
+  },
   link: {
     color: "white",
     textDecoration: "none"

@@ -14,6 +14,17 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 function ItemCard({ classes, item }) {
+  const addToCart = item => {
+    console.log(item);
+    var cartItems;
+    if (localStorage.getItem("productsInCart") == null) {
+      cartItems = [];
+    } else {
+      cartItems = JSON.parse(localStorage.getItem("productsInCart"));
+    }
+    cartItems.push(item);
+    localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+  };
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -36,7 +47,7 @@ function ItemCard({ classes, item }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to cart">
+        <IconButton onClick={() => addToCart(item)} aria-label="add to cart">
           <AddShoppingCartIcon />
         </IconButton>
       </CardActions>
