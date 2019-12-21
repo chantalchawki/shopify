@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./styles";
+import { Link } from "react-router-dom";
+
 import {
   withStyles,
   CardHeader,
@@ -8,14 +10,50 @@ import {
   IconButton,
   CardContent,
   Typography,
-  CardActions
+  CardActions,
+  Grid,
+  Button
 } from "@material-ui/core";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import Grow from "@material-ui/core/Grow";
+import Paper from "@material-ui/core/Paper";
+import Popper from "@material-ui/core/Popper";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
+const options = ["Edit", "Delete"];
 
 function ItemCard({ classes, item }) {
+  const [open, setOpen] = React.useState(false);
+  const [selectedAdminIndex, setselectedAdminIndex] = React.useState(1);
+
+  const anchorRef = React.useRef(null);
+
   return (
     <Card className={classes.card}>
+      <Popper
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+      >
+        <Paper>
+          <MenuList id="split-button-menu" onClick={() => setOpen(!open)}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Button>
+                  <Link to="/EditItem">EDIT</Link>
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Link to="/">Delete</Link>
+              </Grid>
+            </Grid>
+          </MenuList>
+        </Paper>
+      </Popper>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
@@ -23,7 +61,11 @@ function ItemCard({ classes, item }) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton
+            ref={anchorRef}
+            onClick={() => setOpen(!open)}
+            aria-label="settings"
+          >
             <MoreVertIcon />
           </IconButton>
         }
