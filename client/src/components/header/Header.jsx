@@ -12,12 +12,14 @@ import {
 } from "@material-ui/core";
 
 import styles from "./styles";
+import AuthService from "../../Services/AuthService";
 
 function Header({ classes }) {
   const [user, setUser] = useState();
   useEffect(() => {
-    setUser({});
+    setUser(AuthService.user);
   }, []);
+
   return (
     <div container className={classes.root}>
       <CssBaseline />
@@ -46,7 +48,7 @@ function Header({ classes }) {
           ) : (
             <Grid container className={classes.rightGrid} alignItems="center">
               <Typography variant="h6" color="inherit">
-                user
+                {user.name}
               </Typography>
               <Link to="/cart" className={classes.link}>
                 <ShoppingCartIcon

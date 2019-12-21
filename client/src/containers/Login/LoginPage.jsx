@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Grid,
@@ -12,19 +12,31 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import styles from "./styles";
-import UsersService from "../../Services/UsersService";
+import AuthService from "../../Services/AuthService";
 
-function LoginPage({ classes }) {
+function LoginPage({ classes, history }) {
+  useEffect(() => {
+    if (AuthService.user) {
+      history.push('/');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (event, props) => {
+  const [error, setError] = useState("");
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const user = {
-      email: email,
-      password: password
+      Email: email,
+      Password: password
     };
-    let res = UsersService.login(user);
-    localStorage.setItem("token", res.data.token);
+    const loggedIn = await AuthService.login(user);
+    if (loggedIn) {
+      history.push('/');
+    } else {
+      setError("Invalid Email or Password");
+    }
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -75,6 +87,9 @@ function LoginPage({ classes }) {
               <Link to="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
+            </Grid>
+            <Grid item>
+              <p>{error}</p>
             </Grid>
           </Grid>
         </form>

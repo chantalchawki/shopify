@@ -7,36 +7,19 @@ import DrawerMenu from "../../components/sideMenu/DrawerMenu";
 import ItemCard from "../../components/ItemCard/ItemCard";
 
 import styles from "./styles";
+import ItemsService from "../../Services/ItemsService";
+
 function LandingPage({ classes }) {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    setItems([
-      {
-        id: 1,
-        name: "itemName",
-        price: "1.0",
-        description: "Khaled Khaled Ana 3ayz Pepsiii"
-      },
-      {
-        id: 2,
-        name: "itemName",
-        price: "1.0",
-        description: "Khaled Khaled Ana 3ayz Pepsiii"
-      },
-      {
-        id: 3,
-        name: "itemName",
-        price: "1.0",
-        description: "Khaled Khaled Ana 3ayz Pepsiii"
-      },
-      {
-        id: 4,
-        name: "itemName",
-        price: "1.0",
-        description: "Khaled Khaled Ana 3ayz Pepsiii"
-      }
-    ]);
+    loadItems();
   }, []);
+
+  const loadItems = async () => {
+    const items = (await ItemsService.getAllItems()).data.Result;
+    setItems(items);
+  }
+
   return (
     <Grid container className={classes.root}>
       <Grid container item className={classes.header}>

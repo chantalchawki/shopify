@@ -38,12 +38,12 @@ function ItemCard({ classes, item }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={item.name}
-        subheader={item.price}
+        title={item.Name}
+        subheader={item.Price}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {item.description}
+          {item.Description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

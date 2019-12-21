@@ -1,7 +1,7 @@
 import axios from "axios";
 
 function createItem(item) {
-  return axios.post("http://localhost:62248/api/ItemsService.svc/", { item });
+  return axios.post("http://localhost:62248/api/ItemsService.svc/", item);
 }
 
 function getAllItems() {
@@ -21,6 +21,7 @@ function UpdateItem(item) {
     item
   });
 }
+
 export default {
   createItem,
   getAllItems,

@@ -106,6 +106,7 @@
     <Content Include="api\ItemsService.svc" />
     <Content Include="api\OrdersService.svc" />
     <Content Include="api\UsersService.svc" />
+    <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +127,9 @@
       <DependentUpon>UsersService.svc</DependentUpon>
     </Compile>
     <Compile Include="Db\ShopifyContext.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Http\BadRequest.cs" />
     <Compile Include="Http\Created.cs" />
     <Compile Include="Http\HttpResponse.cs" />
