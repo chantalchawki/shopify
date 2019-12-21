@@ -7,9 +7,7 @@ import {
   Typography,
   Avatar,
   CssBaseline,
-  Container,
-  FormControlLabel,
-  Checkbox
+  Container
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -19,7 +17,6 @@ import UsersService from "../../Services/UsersService";
 function LoginPage({ classes }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState("");
   const handleSubmit = (event, props) => {
     event.preventDefault();
     const user = {
@@ -63,11 +60,6 @@ function LoginPage({ classes }) {
             id="password"
             autoComplete="current-password"
             onChange={e => setPassword(e.target.value)}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-            onChange={e => setRemember(e.target.value)}
           />
           <Button
             type="submit"

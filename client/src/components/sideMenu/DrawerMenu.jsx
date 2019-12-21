@@ -1,13 +1,6 @@
 import React from "react";
 
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  withStyles
-} from "@material-ui/core";
+import { List, ListItem, ListItemText, withStyles } from "@material-ui/core";
 import styles from "./styles";
 
 function DrawerMenu({ classes }) {
