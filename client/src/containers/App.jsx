@@ -5,6 +5,9 @@ import LoginPage from "./Login/LoginPage";
 import LandingPage from "./landingPage/LandingPage";
 import AddItem from "./AddItem/AddItem";
 import page404 from "./page404/page404";
+import EditItem from "./EditItem/EditItem";
+import ProfilePage from "./Profile/ProfilePage";
+import CheckOutPage from "./CheckOut/CheckOutPage";
 import CartPage from "./Cart/CartPage";
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
           <Route path="/addItem" exact component={AddItem} />
           <Route path="/cart" exact component={CartPage} />
           <Route path="/page404" exact component={page404} />
+          <Route path="/EditItem" exact component={EditItem} />
+          <Route path="/ProfilePage" exact component={ProfilePage} />
+          <Route path="/checkOut" exact component={CheckOutPage} />
         </Switch>
       </Router>
     </React.Fragment>
