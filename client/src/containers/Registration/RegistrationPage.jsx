@@ -14,12 +14,12 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import styles from "./styles";
 
 function RegistrationPage({ classes }) {
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [area, setArea] = useState("");
   const [address, setAddress] = useState("");
+  const [mobile, setMobile] = useState("");
 
   const handleSubmit = (event, props) => {
     event.preventDefault();
@@ -37,29 +37,17 @@ function RegistrationPage({ classes }) {
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                autoComplete="name"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="name"
+                label="Name"
                 autoFocus
-                onChange={e => setFName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                onChange={e => setLName(e.target.value)}
+                onChange={e => setName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -85,6 +73,18 @@ function RegistrationPage({ classes }) {
                 id="password"
                 autoComplete="current-password"
                 onChange={e => setPassword(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="mobile"
+                label="Mobile"
+                name="mobile"
+                autoComplete="mobile"
+                onChange={e => setMobile(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
