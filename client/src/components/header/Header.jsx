@@ -7,7 +7,8 @@ import {
   CssBaseline,
   Toolbar,
   withStyles,
-  AppBar
+  AppBar,
+  Grid
 } from "@material-ui/core";
 
 import styles from "./styles";
@@ -22,30 +23,38 @@ function Header({ classes }) {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Shopify
-          </Typography>
+          <Link to="/" className={classes.link}>
+            <Typography variant="h6" className={classes.title}>
+              Shopify
+            </Typography>
+          </Link>
           {!user ? (
-            <React.Fragment>
-              <Link className={classes.link} color="white" to="/login">
-                LOGIN
-              </Link>
-              <Button className={classes.btn} type="primary">
-                <Link className={classes.link} to="/register">
-                  REGISTER
+            <Grid container className={classes.rightGrid} alignItems="center">
+              <Grid items>
+                <Link className={classes.link} color="white" to="/login">
+                  LOGIN
                 </Link>
-              </Button>
-            </React.Fragment>
+              </Grid>
+              <Grid item>
+                <Button className={classes.btn} type="primary">
+                  <Link className={classes.link} to="/register">
+                    REGISTER
+                  </Link>
+                </Button>
+              </Grid>
+            </Grid>
           ) : (
-            <React.Fragment>
+            <Grid container className={classes.rightGrid} alignItems="center">
               <Typography variant="h6" color="inherit">
                 user
               </Typography>
-              <ShoppingCartIcon
-                className={classes.icon}
-                onClick={() => console.log("pressed")}
-              />
-            </React.Fragment>
+              <Link to="/cart" className={classes.link}>
+                <ShoppingCartIcon
+                  className={classes.icon}
+                  onClick={() => console.log("pressed")}
+                />
+              </Link>
+            </Grid>
           )}
         </Toolbar>
       </AppBar>
