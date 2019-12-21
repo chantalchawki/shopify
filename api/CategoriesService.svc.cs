@@ -9,7 +9,6 @@ namespace Shopify.api
     public class CategoriesService : ICategoriesService
     {
         private ShopifyContext _dbContext = new ShopifyContext();
-
         public HttpResponse<List<Category>> GetAll()
         {
             var categories = from category in this._dbContext.Categories select category;

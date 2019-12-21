@@ -17,5 +17,7 @@ namespace Shopify.api
             UriTemplate = "/"
         )]
         HttpResponse<List<Category>> GetAll();
+
+       
     }
 }
