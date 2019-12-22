@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="85617fc6-076e-4fc5-b157-3f5f438f4e95" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:62248/api/CreateCategoriesService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CreateCategoriesService.xsd" MetadataType="Schema" ID="591dd1c2-229a-4c55-a85d-8e2a284942f8" SourceId="1" SourceUrl="http://localhost:62248/api/CreateCategoriesService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CreateCategoriesService1.xsd" MetadataType="Schema" ID="1fb58938-a710-4237-82c8-a1b06f8d617f" SourceId="1" SourceUrl="http://localhost:62248/api/CreateCategoriesService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CreateCategoriesService.disco" MetadataType="Disco" ID="21bfa402-c06e-45f3-a8fe-154a9e1adeb2" SourceId="1" SourceUrl="http://localhost:62248/api/CreateCategoriesService.svc?disco" />
+    <MetadataFile FileName="CreateCategoriesService.wsdl" MetadataType="Wsdl" ID="f2b02e9d-6ac9-4258-8ed5-aecdf40fc853" SourceId="1" SourceUrl="http://localhost:62248/api/CreateCategoriesService.svc?wsdl" />
+    <MetadataFile FileName="CreateCategoriesService2.xsd" MetadataType="Schema" ID="b37f2aab-45db-428f-a886-0337a861dd92" SourceId="1" SourceUrl="http://localhost:62248/api/CreateCategoriesService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

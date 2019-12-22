@@ -5,10 +5,7 @@ VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopify", "Shopify.csproj", "{0121E8B7-50F3-435D-9DBB-02D38122C033}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddCategory", "..\AddCategory\AddCategory.csproj", "{45E31BE5-AA56-438D-B147-BE55D973CF0B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0121E8B7-50F3-435D-9DBB-02D38122C033} = {0121E8B7-50F3-435D-9DBB-02D38122C033}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddCategory", "AddCategory\AddCategory.csproj", "{45E31BE5-AA56-438D-B147-BE55D973CF0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
