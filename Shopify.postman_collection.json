@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "301915e2-ef9b-418d-9af8-7f63688d474b",
+		"name": "Shopify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"Item 1\",\n\t\"Price\": 200.5,\n\t\"Description\": \"Item 1 Description\",\n\t\"CategoryId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:62248/api/ItemsService.svc/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"ItemsService.svc",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:62248/api/ItemsService.svc/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"ItemsService.svc",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:62248/api/ItemsService.svc/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"ItemsService.svc",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:62248/api/ItemsService.svc/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"ItemsService.svc",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Item",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"Item 3\",\n\t\"Price\": 200.5,\n\t\"Description\": \"Item 1 Description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:62248/api/ItemsService.svc/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"ItemsService.svc",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"khaled\",\n\t\"Email\": \"khaled@gmail.com\",\n\t\"Password\": \"1234\",\n\t\"Address\": \"fejfijrbfbe\",\n\t\"Area\": \"rfbiejbfij\",\n\t\"Mobile\": \"27349824798316490\",\n\t\"isAdmin\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:62248/api/UsersService.svc/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"UsersService.svc",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Email\": \"khaled@gmail.com\",\n\t\"Password\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:62248/api/AuthenticationService.svc/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"AuthenticationService.svc",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:62248/api/UsersService.svc/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"UsersService.svc",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:62248/api/CategoriesService.svc/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"CategoriesService.svc",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:62248/api/OrdersService.svc/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"OrdersService.svc",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:62248/api/OrdersService.svc/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"OrdersService.svc",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Price\": \"500\",\n\t\"Items\": [{ \"Id\": 1 }],\n\t\"UserId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:62248/api/OrdersService.svc/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "62248",
+					"path": [
+						"api",
+						"OrdersService.svc",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
