@@ -21,11 +21,11 @@ namespace Shopify.api
 
         [OperationContract]
         [WebInvoke(
-            Method = "GET",
+            Method = "POST",
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Bare,
-            UriTemplate = "/loginWithGoogle/{token}"
+            UriTemplate = "/loginWithGoogle"
         )]
-        HttpResponse<string> LoginWithGoogle(string token);
+        HttpResponse<string> LoginWithGoogle(GoogleLoginPayload payload);
     }
 }

@@ -30,9 +30,9 @@ namespace Shopify.api
             return new Ok<string>(token.ToString());
         }
 
-        public HttpResponse<string> LoginWithGoogle(string token)
+        public HttpResponse<string> LoginWithGoogle(GoogleLoginPayload payload)
         {
-            var decodedToken = new JwtSecurityToken(token);
+            var decodedToken = new JwtSecurityToken(payload.Token);
             var email = decodedToken.Claims.First(c => c.Type == "email").Value;
             var name = decodedToken.Claims.First(c => c.Type == "name").Value;
 
@@ -55,9 +55,8 @@ namespace Shopify.api
                 user = result[0];
             }
 
-            var generatedToken = this.generateToken(user);
-            return new Ok<string>(generatedToken.ToString());
-
+            var token = this.generateToken(user);
+            return new Ok<string>(token.ToString());
         }
 
         private String generateToken(User user)
