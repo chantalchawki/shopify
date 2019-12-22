@@ -16,28 +16,37 @@ import Header from "../../components/header/Header";
 import ItemsService from "../../Services/ItemsService";
 import CategoriesService from "../../Services/CategoriesService";
 
-function AddItem({ classes }) {
+function AddItem({ classes, history }) {
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    let res = CategoriesService.getAllCategories();
-    setCategories(res.data);
+    loadCategories();
   }, []);
 
-  const handleSubmit = (event, props) => {
+  const loadCategories = async () => {
+    const res = (await CategoriesService.getAllCategories()).data.Result;
+    setCategories(res);
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(categoryId);
     const item = {
       Name: itemName,
       Price: price,
       Description: description,
       CategoryId: categoryId
     };
-    ItemsService.createItem(item);
+    const res = await ItemsService.createItem(item);
+    if (res.status === 201) {
+      history.push('/');
+    }
   };
+
   return (
     <React.Fragment>
       <Grid item className={classes.header}>
@@ -89,9 +98,9 @@ function AddItem({ classes }) {
             <Autocomplete
               id="categoriesComboBox"
               options={categories}
-              getOptionLabel={option => option.title}
+              getOptionLabel={option => option.Name}
               style={{ width: 300 }}
-              onChange={e => setCategoryId(e.target.value.id)}
+              onChange={(e, value) => setCategoryId(value.Id)}
               renderInput={params => (
                 <TextField
                   {...params}
