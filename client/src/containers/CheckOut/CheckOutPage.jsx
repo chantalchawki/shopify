@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { PayPalButton } from "react-paypal-button-v2";
 import Header from "../../components/header/Header";
+import OrdersService from "../../Services/OrdersService";
+import AuthService from "../../Services/AuthService";
 
 import {
   Grid,
@@ -18,8 +21,43 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import PaymentIcon from "@material-ui/icons/Payment";
 
-function CheckOutPage({ classes }) {
+function CheckOutPage({ classes, history }) {
   const [isPayPal, setisPayPal] = useState(false);
+  const [total, setTotal] = useState(0);
+  const paypalClientId = 'AYV-QGkYRL1sa4hUPIWOuOfeFJEZaNs3NCAc-KBlzYCsg6o8AKKV3ph9Xtg-FyminRQ7pYslo09V_mwm';
+  const products = JSON.parse(localStorage.getItem('productsInCart'));
+
+  useEffect(() => {
+    const t = products.reduce((prev, i) => prev + i.Price, 0);
+    setTotal(t);
+  }, []);
+
+  const submitCart = async () => {
+    const res = await OrdersService.createOrder({
+      Price: total,
+      UserId: +AuthService.user.id,
+      Items: products,
+    });
+
+    if (res.status === 201) {
+      history.push('/');
+    }
+  }
+
+  const paypalSuccess = async (details, data) => {
+    console.log('Details', details);
+    console.log('Data', data);
+
+    const res = await OrdersService.createOrder({
+      Price: total,
+      UserId: +AuthService.user.id,
+      Items: products,
+    });
+
+    if (res.status === 201) {
+      history.push('/');
+    }
+  }
 
   return (
     <Grid container className={classes.root}>
@@ -29,6 +67,7 @@ function CheckOutPage({ classes }) {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
+          <h4>Total: {total}</h4>
           <Avatar className={classes.avatar}>
             <PaymentIcon />
           </Avatar>
@@ -39,7 +78,7 @@ function CheckOutPage({ classes }) {
           <FormControl className={classes.checkOutForm}>
             <Typography component="h3">How would you like to pay?</Typography>
             <RadioGroup>
-              <FormControlLabel
+              {/* <FormControlLabel
                 value="CreditCard"
                 control={<Radio />}
                 onClick={() => {
@@ -71,7 +110,7 @@ function CheckOutPage({ classes }) {
                 ) : (
                   ""
                 )}
-              </div>
+              </div> */}
               <FormControlLabel
                 value="Cash"
                 control={<Radio />}
@@ -82,12 +121,20 @@ function CheckOutPage({ classes }) {
               />
             </RadioGroup>
           </FormControl>
+          <PayPalButton
+            amount={total}
+            onSuccess={paypalSuccess}
+            options={{
+              clientId: paypalClientId
+            }}
+          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={submitCart}
           >
             Place Order
           </Button>

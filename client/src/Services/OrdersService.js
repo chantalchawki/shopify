@@ -9,7 +9,7 @@ function getOrder(orderId) {
 }
 
 function createOrder(order) {
-  return axios.post("http://localhost:62248/api/OrdersService.svc/", { order });
+  return axios.post("http://localhost:62248/api/OrdersService.svc/", order);
 }
 
 export default {

@@ -23,6 +23,7 @@ import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import ItemsService from "../../Services/ItemsService";
+import AuthService from "../../Services/AuthService";
 const options = ["Edit", "Delete"];
 
 function ItemCard({ classes, item, onDelete, isAdmin }) {
@@ -80,7 +81,7 @@ function ItemCard({ classes, item, onDelete, isAdmin }) {
             I
           </Avatar>
         }
-       {...(isAdmin === "True" && {
+       {...(isAdmin && {
          action: 
           (<IconButton
             ref={anchorRef}
@@ -99,9 +100,9 @@ function ItemCard({ classes, item, onDelete, isAdmin }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton onClick={() => addToCart(item)} aria-label="add to cart">
+        {AuthService.user && <IconButton onClick={() => addToCart(item)} aria-label="add to cart">
           <AddShoppingCartIcon />
-        </IconButton>
+        </IconButton>}
       </CardActions>
     </Card>
   );

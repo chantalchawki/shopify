@@ -51,8 +51,9 @@ function LoginPage({ classes, history }) {
   };
 
   const googleLogin = async ({ Zi }) => {
-    const loggedIn = await AuthService.loginWithGoogle(Zi['id_token']);
+    const loggedIn = await AuthService.loginWithGoogle({ Token: Zi['id_token'] });
     if (loggedIn) {
+      window.gapi.auth2.getAuthInstance().signOut();
       history.push('/');
     }
   };

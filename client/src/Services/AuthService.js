@@ -22,8 +22,9 @@ class AuthService {
 
   async loginWithGoogle(googleToken) {
     try {
-      const token = (await axios.get(
-        `http://localhost:62248/api/AuthenticationService.svc/loginWithGoogle/${googleToken}`
+      const token = (await axios.post(
+        `http://localhost:62248/api/AuthenticationService.svc/loginWithGoogle`,
+        googleToken
       )).data.Result;
       localStorage.setItem("token", token);
       this.checkJWT();

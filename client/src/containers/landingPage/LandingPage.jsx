@@ -17,7 +17,7 @@ function LandingPage({ classes }) {
     loadItems();
     const user = AuthService.user;
     if(user){
-      setIsAdmin(user.isAdmin)
+      setIsAdmin(user.isAdmin == 'True');
     }
   }, []);
   console.log(isAdmin);
@@ -45,7 +45,7 @@ function LandingPage({ classes }) {
             return <ItemCard item={item} onDelete={loadItems} isAdmin={isAdmin} />;
           })}
         </Grid>
-        {isAdmin === "True" && <Grid item className={classes.addIcon}>
+        {isAdmin && <Grid item className={classes.addIcon}>
           <Link to="/addItem">
             <Fab color="primary" aria-label="add">
               <AddIcon />
