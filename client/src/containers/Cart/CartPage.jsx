@@ -15,10 +15,11 @@ import {
 import withStyles from "@material-ui/core/styles/withStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
 import styles from "./styles";
 import Header from "../../components/header/Header";
 
-function CartPage({ classes }) {
+function CartPage({ classes, history }) {
   const [items, setItems] = useState();
   const [total, setTotal] = useState(0);
   useEffect(() => {
@@ -29,7 +30,7 @@ function CartPage({ classes }) {
     if (items) {
       let tempTotal = 0;
       items.map(item => {
-        return (tempTotal += parseInt(item.price));
+        return (tempTotal += parseInt(item.Price));
       });
       setTotal(tempTotal);
       localStorage.setItem("productsInCart", JSON.stringify(items));
@@ -41,7 +42,12 @@ function CartPage({ classes }) {
     console.log(idx, items);
     setItems(items.filter((item, index) => index !== idx));
   };
-
+  const AddItem = i => {
+   let cartItems = JSON.parse(localStorage.getItem("productsInCart"));
+   cartItems.push(i);
+   setItems(cartItems); 
+   localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+  };
   return (
     <React.Fragment>
       <Grid item className={classes.header}>
@@ -63,9 +69,9 @@ function CartPage({ classes }) {
                   {items.map(item => {
                     return (
                       <ListItem>
-                        <ListItemText>{item.name}</ListItemText>
+                        <ListItemText>{item.Name}</ListItemText>
                         <ListItemText align="end">
-                          {item.price + " L.E"}
+                          {item.Price + " L.E"}
                         </ListItemText>
                         <IconButton
                           onClick={() => removeItem(item)}
@@ -73,6 +79,13 @@ function CartPage({ classes }) {
                           aria-label="delete"
                         >
                           <DeleteIcon />
+                        </IconButton>
+                        <IconButton
+                          onClick={() => AddItem(item)}
+                          edge="end"
+                          aria-label="delete"
+                        >
+                          <AddIcon />
                         </IconButton>
                       </ListItem>
                     );
@@ -89,6 +102,7 @@ function CartPage({ classes }) {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
+                  onClick={() => history.push("/checkOut")}
                 >
                   Proceed
                 </Button>

@@ -36,5 +36,14 @@ namespace Shopify.api
            UriTemplate = "/"
         )]
         HttpResponse<User> Create(User user);
+
+        [OperationContract]
+        [WebInvoke(
+           Method = "PATCH",
+           ResponseFormat = WebMessageFormat.Json,
+           BodyStyle = WebMessageBodyStyle.Bare,
+           UriTemplate = "/{id}"
+        )]
+        HttpResponse<User> Edit(string id, User user);
     }
 }

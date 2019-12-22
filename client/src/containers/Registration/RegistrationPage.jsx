@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Grid,
@@ -13,8 +13,16 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import styles from "./styles";
 import UsersService from "../../Services/UsersService";
+import AuthService from "../../Services/AuthService";
 
-function RegistrationPage({ classes }) {
+function RegistrationPage({ classes, history }) {
+  useEffect(() => {
+    if (AuthService.user) {
+      history.push('/');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,14 +33,15 @@ function RegistrationPage({ classes }) {
   const handleSubmit = (event, props) => {
     event.preventDefault();
     const user = {
-      name: name,
-      email: email,
-      password: password,
-      area: area,
-      address: address,
-      mobile: mobile
+      Name: name,
+      Email: email,
+      Password: password,
+      Area: area,
+      Address: address,
+      Mobile: mobile
     };
     UsersService.register(user);
+    history.push("/login");
   };
 
   return (

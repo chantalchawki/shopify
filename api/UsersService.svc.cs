@@ -35,5 +35,16 @@ namespace Shopify.api
             this._dbContext.SaveChanges();
             return new Created<User>(created);
         }
+
+        public HttpResponse<User> Edit(string id, User user)
+        {
+            var oldUser = this._dbContext.Users.Find(new object[] { int.Parse(id) });
+            oldUser.Name = user.Name;
+            oldUser.Address = user.Address;
+            oldUser.Area = user.Area;
+            oldUser.Mobile = user.Mobile;
+            this._dbContext.SaveChanges();
+            return new Ok<User>(oldUser);
+        }
     }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import RegistrationPage from "./Registration/RegistrationPage";
 import LoginPage from "./Login/LoginPage";
 import LandingPage from "./landingPage/LandingPage";
@@ -9,6 +10,10 @@ import EditItem from "./EditItem/EditItem";
 import ProfilePage from "./Profile/ProfilePage";
 import CheckOutPage from "./CheckOut/CheckOutPage";
 import CartPage from "./Cart/CartPage";
+import AuthService from "../Services/AuthService";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+
+AuthService.checkJWT();
 
 function App() {
   return (
@@ -18,11 +23,11 @@ function App() {
           <Route path="/register" exact component={RegistrationPage} />
           <Route path="/login" exact component={LoginPage} />
           <Route path="/" exact component={LandingPage} />
-          <Route path="/addItem" exact component={AddItem} />
-          <Route path="/cart" exact component={CartPage} />
+          <PrivateRoute path="/addItem" exact component={AddItem} />
+          <PrivateRoute path="/cart" exact component={CartPage} />
           <Route path="/page404" exact component={page404} />
-          <Route path="/EditItem" exact component={EditItem} />
-          <Route path="/ProfilePage" exact component={ProfilePage} />
+          <Route path="/EditItem/:id" exact component={EditItem} />
+          <Route path="/Profile" exact component={ProfilePage} />
           <Route path="/checkOut" exact component={CheckOutPage} />
         </Switch>
       </Router>
