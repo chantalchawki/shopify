@@ -1,15 +1,15 @@
 import axios from "axios";
 
 function register(user) {
-  return axios.post("http://localhost:62248/api/UsersService.svc/", user);
+  return axios.post("/api/UsersService.svc/", user);
 }
 
 function getUser(userId) {
-  return axios.get(`http://localhost:62248/api/UsersService.svc/${userId}`);
+  return axios.get(`/api/UsersService.svc/${userId}`);
 }
 
 function UpdateUser(user) {
-  return axios.patch(`http://localhost:62248/api/UsersService.svc/${user.Id}`, user);
+  return axios.patch(`/api/UsersService.svc/${user.Id}`, user);
 }
 export default {
   register,

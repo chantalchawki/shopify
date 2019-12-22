@@ -13,12 +13,16 @@ import CartPage from "./Cart/CartPage";
 import AuthService from "../Services/AuthService";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
+let axiosDefaults = require("axios/lib/defaults");
+// axiosDefaults.baseURL = "http://localhost:62248";
+axiosDefaults.baseURL = "https://a0678805.ngrok.io";
+
 AuthService.checkJWT();
 window.gapi.load("auth2", () => {
-  window.gapi.auth2
-    .init({
-      client_id: "126151922298-jv8d5mev97sho4qb7ns97qt3hmibampb.apps.googleusercontent.com",
-    });
+  window.gapi.auth2.init({
+    client_id:
+      "126151922298-jv8d5mev97sho4qb7ns97qt3hmibampb.apps.googleusercontent.com"
+  });
 });
 
 function App() {

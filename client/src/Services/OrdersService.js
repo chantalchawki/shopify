@@ -1,15 +1,15 @@
 import axios from "axios";
 
 function getAllOrders() {
-  return axios.get("http://localhost:62248/api/OrdersService.svc/");
+  return axios.get("/api/OrdersService.svc/");
 }
 
 function getOrder(orderId) {
-  return axios.get(`http://localhost:62248/api/OrdersService.svc/${orderId}`);
+  return axios.get(`/api/OrdersService.svc/${orderId}`);
 }
 
 function createOrder(order) {
-  return axios.post("http://localhost:62248/api/OrdersService.svc/", order);
+  return axios.post("/api/OrdersService.svc/", order);
 }
 
 export default {
