@@ -34,6 +34,9 @@ namespace Shopify.Models
 
             [DataMember]
             public List<Order> Orders { get; set; }
+
+            [DataMember]
+            public bool isGoogleUser { get; set; }
     }
     
 }

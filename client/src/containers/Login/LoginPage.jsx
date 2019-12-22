@@ -19,12 +19,23 @@ function LoginPage({ classes, history }) {
     if (AuthService.user) {
       history.push('/');
     }
+
+    window.gapi.signin2.render("google-login", {
+      scope: "profile email",
+      width: 250,
+      height: 50,
+      longtitle: false,
+      theme: "dark",
+      onsuccess: googleLogin,
+      onfailure: console.log
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const user = {
@@ -39,30 +50,15 @@ function LoginPage({ classes, history }) {
     }
   };
 
-  const googleLogin = async () => {
-    window.gapi.load("auth2", () => {
-      window.gapi.auth2
-        .init({
-          client_id: "126151922298-jv8d5mev97sho4qb7ns97qt3hmibampb.apps.googleusercontent.com",
-        })
-        .then(() => {
-          window.gapi.signin2.render("my-signIn", {
-            scope: "profile email",
-            width: 250,
-            height: 50,
-            longtitle: false,
-            theme: "dark",
-            onsuccess: console.log,
-            onfailure: console.log
-          });
-        });
-    });
+  const googleLogin = async ({ Zi }) => {
+    const loggedIn = await AuthService.loginWithGoogle(Zi['id_token']);
+    if (loggedIn) {
+      history.push('/');
+    }
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <div id="my-signIn" />
-      <button onClick={googleLogin}>Google</button>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -105,6 +101,7 @@ function LoginPage({ classes, history }) {
           >
             Sign In
           </Button>
+          <div id="google-login" />
           <Grid container>
             <Grid item>
               <Link to="/register" variant="body2">

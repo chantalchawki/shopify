@@ -25,6 +25,43 @@ namespace Shopify.api
             }
 
             var user = result[0];
+            var token = generateToken(user);
+            
+            return new Ok<string>(token.ToString());
+        }
+
+        public HttpResponse<string> LoginWithGoogle(string token)
+        {
+            var decodedToken = new JwtSecurityToken(token);
+            var email = decodedToken.Claims.First(c => c.Type == "email").Value;
+            var name = decodedToken.Claims.First(c => c.Type == "name").Value;
+
+            var results = from u in this._dbContext.Users where u.Email == email && u.isGoogleUser == true select u;
+            var result = results.ToList();
+
+            User user = null;
+
+            if (result.Count() == 0)
+            {
+                user = new User();
+                user.Name = name;
+                user.Email = email;
+                user.isGoogleUser = true;
+                var created = this._dbContext.Users.Add(user);
+                this._dbContext.SaveChanges();
+            }
+            else
+            {
+                user = result[0];
+            }
+
+            var generatedToken = this.generateToken(user);
+            return new Ok<string>(generatedToken.ToString());
+
+        }
+
+        private String generateToken(User user)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("abcsfjjjdejbljefbljhfljehfvl3jhfvljehv3fljhvelfjv");
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -42,7 +79,7 @@ namespace Shopify.api
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateEncodedJwt(tokenDescriptor);
-            return new Ok<string>(token.ToString());
+            return token;
         }
     }
 }

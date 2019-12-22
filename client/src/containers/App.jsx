@@ -14,6 +14,12 @@ import AuthService from "../Services/AuthService";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
 AuthService.checkJWT();
+window.gapi.load("auth2", () => {
+  window.gapi.auth2
+    .init({
+      client_id: "126151922298-jv8d5mev97sho4qb7ns97qt3hmibampb.apps.googleusercontent.com",
+    });
+});
 
 function App() {
   return (

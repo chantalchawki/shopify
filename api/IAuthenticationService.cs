@@ -1,5 +1,6 @@
 ﻿using Shopify.Http;
 using Shopify.Models;
+using System;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 
@@ -17,5 +18,14 @@ namespace Shopify.api
             UriTemplate = "/login"
         )]
         HttpResponse<string> Login(LoginPayload payload);
+
+        [OperationContract]
+        [WebInvoke(
+            Method = "GET",
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "/loginWithGoogle/{token}"
+        )]
+        HttpResponse<string> LoginWithGoogle(string token);
     }
 }
